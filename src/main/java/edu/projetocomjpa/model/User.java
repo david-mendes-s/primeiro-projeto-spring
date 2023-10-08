@@ -1,5 +1,6 @@
 package edu.projetocomjpa.model;
 
+import edu.projetocomjpa.record.UserDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,15 +13,26 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
-    private Integer id;
+    private String id;
     @Column(length = 20, nullable = false)
     private String name;
     @Column(length = 50, nullable = false)
     private String userName;
     @Column(length = 100, nullable = false)
     private String password;
+
+
+    public User(UserDTO requestUser){
+        this.name = requestUser.name();
+        this.userName = requestUser.userName();
+        this.password = requestUser.password();
+    }
+
+    public User(){
+        
+    }
 
     public String getName() {
         return name;
